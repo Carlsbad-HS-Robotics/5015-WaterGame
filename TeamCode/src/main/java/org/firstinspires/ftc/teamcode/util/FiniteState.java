@@ -15,13 +15,6 @@ public class FiniteState {
         extended,
         retracted
     }
-    
-    enum clawState {
-        open,
-        close,
-    }
-    
-    state = state.intake;
 
     //TODO set to array
     pubic Pose2D runStuff() {
@@ -30,7 +23,7 @@ public class FiniteState {
         }
         if(state.outtake) {
             return new Pose2D(2);
-            }
+        }
     }
 
     
