@@ -1,26 +1,24 @@
 package org.firstinspires.ftc.teamcode.CurrentSeason.OpModes;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.linearOpMode;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.roboctopi.cuttlefish.components.Motor;
-import com.roboctopi.cuttlefish.controller.PTPController;
-import com.roboctopi.cuttlefish.controller.Waypoint;
+import com.roboctopi.cuttlefishftcbridge.opmodeTypes.GamepadOpMode;
 import com.roboctopi.cuttlefish.localizer.ThreeEncoderLocalizer;
-import com.roboctopi.cuttlefish.queue.PointTask;
-import com.roboctopi.cuttlefish.utils.Direction;
-import com.roboctopi.cuttlefish.utils.Pose;
 import com.roboctopi.cuttlefishftcbridge.devices.CuttleEncoder;
 import com.roboctopi.cuttlefishftcbridge.devices.CuttleRevHub;
 import com.roboctopi.cuttlefishftcbridge.devices.CuttleMotor;
 import com.roboctopi.cuttlefish.controller.MecanumController;
-import com.roboctopi.cuttlefishftcbridge.opmodeTypes.GamepadOpMode;
-import org.firstinspires.ftc.teamcode.util.MotionLibrary.util.Pose2D;
-import org.firstinspires.ftc.teamcode.FiniteState;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.roboctopi.cuttlefish.controller.PTPController;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.roboctopi.cuttlefish.controller.Waypoint;
+import com.roboctopi.cuttlefish.components.Motor;
+import com.roboctopi.cuttlefish.queue.PointTask;
+import com.roboctopi.cuttlefish.utils.Direction;
+import com.roboctopi.cuttlefish.utils.Pose;
 
-public class Tele extends GamepadOpMode {
+public class AutoConfig extends GamepadOpMode {
     CuttleRevHub ctrlHub = new CuttleRevHub(hardwareMap,CuttleRevHub.HubTypes.CONTROL_HUB);
     CuttleRevHub expHub = new CuttleRevHub(hardwareMap,CuttleRevHub.HubTypes.EXPANSION_HUB);
     CuttleEncoder leftEncoder ;
@@ -35,8 +33,6 @@ public class Tele extends GamepadOpMode {
     MecanumController quinton;
     PTPController ptpController;
 
-    FiniteState fsm;
-
     @Override
     public void onInit()
     {
@@ -48,9 +44,6 @@ public class Tele extends GamepadOpMode {
         leftBackMotor .setDirection(Direction.REVERSE);
         leftFrontMotor.setDirection(Direction.REVERSE);
 
-        leftEncoder  = expHub .getEncoder(3,720*4);
-        sideEncoder  = ctrlHub.getEncoder(0,720*4);
-        rightEncoder = ctrlHub.getEncoder(3,720*4);
 
         leftEncoder.setDirection(Direction.REVERSE);
 
@@ -65,28 +58,25 @@ public class Tele extends GamepadOpMode {
 
         quinton = new MecanumController(rightFrontMotor,rightBackMotor,leftFrontMotor,leftBackMotor);
         ptpController = new PTPController(quinton, encoderLocalizer);
+ }
 
-        fsm = new FiniteState();
+    @Override
+    public void main() {
+
     }
 
     @Override
+    public void runOpMode() throws InterruptedException {
+
+    }
+    @Override
     public void mainLoop()
     {
-
-        if (gamepad1.a) { 
-            fsm.state = fsm.state.inatke;
-        }
-        /* Make this move along this vector
-        fsm.runStuff()
-        */
-
-
         encoderLocalizer.update();
         System.out.println(encoderLocalizer.getPos());
-        telemetry.addData("State: ", fsm.state);
-        telemetry.addData("Localizer X: ",encoderLocalizer.getPos().getX());
-        telemetry.addData("Localizer Y: ",encoderLocalizer.getPos().getY());
-        telemetry.addData("Localizer R: ",encoderLocalizer.getPos().getR());
+        telemetry.addData("Localizer X:",encoderLocalizer.getPos().getX());
+        telemetry.addData("Localizer Y:",encoderLocalizer.getPos().getY());
+        telemetry.addData("Localizer R:",encoderLocalizer.getPos().getR());
         telemetry.update();
     }
 }
