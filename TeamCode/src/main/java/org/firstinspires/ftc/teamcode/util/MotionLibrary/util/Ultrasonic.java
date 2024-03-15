@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.MotionLibrary.util;
+package org.firstinspires.ftc.teamcode.util.MotionLibrary.util;
 
 import com.qualcomm.robotcore.hardware.AnalogInput;
 

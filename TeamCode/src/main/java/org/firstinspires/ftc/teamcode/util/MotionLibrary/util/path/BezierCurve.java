@@ -1,6 +1,6 @@
-package org.firstinspires.ftc.teamcode.MotionLibrary.util.path;
+package org.firstinspires.ftc.teamcode.util.MotionLibrary.util.path;
 
-import org.firstinspires.ftc.teamcode.MotionLibrary.util.Vector2D;
+import org.firstinspires.ftc.teamcode.util.MotionLibrary.util.Vector2D;
 
 import java.util.ArrayList;
 import java.util.List;

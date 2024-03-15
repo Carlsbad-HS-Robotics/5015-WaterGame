@@ -1,30 +1,23 @@
-package org.firstinspires.ftc.teamcode.CurrentSeason.OpModes;
+package org.firstinspires.ftc.teamcode.CurrentSeason.Config;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.linearOpMode;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
-import org.firstinspires.ftc.teamcode.util.MotionLibrary.util.Pose2D;
 import com.roboctopi.cuttlefishftcbridge.opmodeTypes.GamepadOpMode;
 import com.roboctopi.cuttlefish.localizer.ThreeEncoderLocalizer;
 import com.roboctopi.cuttlefishftcbridge.devices.CuttleEncoder;
 import com.roboctopi.cuttlefishftcbridge.devices.CuttleRevHub;
 import com.roboctopi.cuttlefishftcbridge.devices.CuttleMotor;
 import com.roboctopi.cuttlefish.controller.MecanumController;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.roboctopi.cuttlefish.controller.PTPController;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.roboctopi.cuttlefish.controller.Waypoint;
-import org.firstinspires.ftc.teamcode.FiniteState;
-import com.roboctopi.cuttlefish.components.Motor;
-import com.roboctopi.cuttlefish.queue.PointTask;
-import com.roboctopi.cuttlefish.utils.Direction;
-import com.roboctopi.cuttlefish.utils.Pose;
 
-public class OpConfig extends GamepadOpMode {
+import org.firstinspires.ftc.teamcode.util.FiniteState;
+
+import com.roboctopi.cuttlefish.utils.Direction;
+
+public class OpModeConfig extends GamepadOpMode {
     CuttleRevHub ctrlHub = new CuttleRevHub(hardwareMap,CuttleRevHub.HubTypes.CONTROL_HUB);
     CuttleRevHub expHub = new CuttleRevHub(hardwareMap,CuttleRevHub.HubTypes.EXPANSION_HUB);
     CuttleEncoder leftEncoder ;
     CuttleEncoder sideEncoder ;
+    CuttleEncoder rightEncoder;
 
     ThreeEncoderLocalizer encoderLocalizer;
     public CuttleMotor leftFrontMotor;
@@ -32,7 +25,7 @@ public class OpConfig extends GamepadOpMode {
     public CuttleMotor rightBackMotor ;
     public CuttleMotor leftBackMotor  ;
     PTPController ptpController;
-    MecanumController quinton;
+    MecanumController chassis;
 
     FiniteState fsm;
 
@@ -61,25 +54,30 @@ public class OpConfig extends GamepadOpMode {
                 1.0 //Calibration constant (see below)
         );
 
-        quinton = new MecanumController(rightFrontMotor,rightBackMotor,leftFrontMotor,leftBackMotor);
-        ptpController = new PTPController(quinton, encoderLocalizer);
+        chassis = new MecanumController(rightFrontMotor,rightBackMotor,leftFrontMotor,leftBackMotor);
+        ptpController = new PTPController(chassis, encoderLocalizer);
 
         fsm = new FiniteState();
     }
 
     @Override
+    public void main() {
+
+    }
+
+    @Override
     public void mainLoop()
     {
-        if (gamepad1.a) { 
+        if (gamepad1.a) {
             fsm.state = fsm.state.inatke;
         }
-        /* Make this move along this vector
-        fsm.runStuff()
-        */
+        //Make this move along this vector
+        //fsm.runStuff();
+
 
 
         encoderLocalizer.update();
-        telemetry.addData("State: ", fsm.state);
+        //telemetry.addData("State: ", fsm.state);
         telemetry.addData("Localizer X: ",encoderLocalizer.getPos().getX());
         telemetry.addData("Localizer Y: ",encoderLocalizer.getPos().getY());
         telemetry.update();

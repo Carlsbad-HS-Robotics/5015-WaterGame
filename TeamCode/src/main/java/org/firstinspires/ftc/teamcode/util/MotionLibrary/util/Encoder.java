@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.MotionLibrary.util;
+package org.firstinspires.ftc.teamcode.util.MotionLibrary.util;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
 

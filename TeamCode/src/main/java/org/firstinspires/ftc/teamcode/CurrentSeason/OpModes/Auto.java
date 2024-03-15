@@ -1,23 +1,30 @@
 package org.firstinspires.ftc.teamcode.CurrentSeason.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.roboctopi.cuttlefish.controller.PTPController;
+import com.roboctopi.cuttlefish.controller.PTPController;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.roboctopi.cuttlefish.controller.Waypoint;
 import com.roboctopi.cuttlefish.queue.DelayTask;
 import com.roboctopi.cuttlefish.queue.PointTask;
 import com.roboctopi.cuttlefish.queue.ServoTask;
 import com.roboctopi.cuttlefish.queue.TaskQueue;
+import com.roboctopi.cuttlefish.utils.PID;
 import com.roboctopi.cuttlefish.utils.Pose;
+
+import org.firstinspires.ftc.teamcode.CurrentSeason.Config.AutoConfig;
 
 @Autonomous(name="Auto")
 public class Auto extends AutoConfig {
 
     TaskQueue queue = new TaskQueue();
+    PTPController ptpController;
+
 
     public void onInit() {
         super.onInit();
 
-        ptpController.setTranslational_PD_ctrlr(new PID( 
+        ptpController.setTranslational_PD_ctrlr(new PID(
             0.02,  // Proportional
             0.0,   // Integral
             0.002, // Derivative

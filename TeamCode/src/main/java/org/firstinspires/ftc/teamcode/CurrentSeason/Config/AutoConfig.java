@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.CurrentSeason.OpModes;
+package org.firstinspires.ftc.teamcode.CurrentSeason.Config;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.linearOpMode;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;

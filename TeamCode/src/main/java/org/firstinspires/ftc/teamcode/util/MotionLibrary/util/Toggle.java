@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.MotionLibrary.util;
+package org.firstinspires.ftc.teamcode.util.MotionLibrary.util;
 
 /**
  * A class that can be used when making a button toggle something.

@@ -1,11 +1,11 @@
-/*use camera to grab stuff if needed
+package org.firstinspires.ftc.teamcode.util;/*use camera to grab stuff if needed
  * make flowchart on
  */
 
 import org.firstinspires.ftc.teamcode.util.MotionLibrary.util.Pose2D;
 
 public class FiniteState {
-    enum state {
+    public enum robotState {
         intake,
         outtake,
         idle
@@ -17,14 +17,12 @@ public class FiniteState {
     }
 
     //TODO set to array
-    pubic Pose2D runStuff() {
-        if(state.intake) {
-        return new Pose2D(1);
+    public Pose2D runStuff() {
+        if(robotState == robotState.intake) {
+            return new Pose2D(1);
         }
-        if(state.outtake) {
+        if(robotState.outtake) {
             return new Pose2D(2);
         }
     }
-
-    
 }

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.MotionLibrary.util;
+package org.firstinspires.ftc.teamcode.util.MotionLibrary.util;
 
 /**
  * Class with built in methods for a PID feedforward loop

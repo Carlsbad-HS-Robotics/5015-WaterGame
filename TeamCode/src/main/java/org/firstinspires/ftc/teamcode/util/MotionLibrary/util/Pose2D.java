@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.MotionLibrary.util;
+package org.firstinspires.ftc.teamcode.util.MotionLibrary.util;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
