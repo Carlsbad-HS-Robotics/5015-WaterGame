@@ -18,7 +18,7 @@ import com.roboctopi.cuttlefishftcbridge.devices.CuttleMotor;
 import com.roboctopi.cuttlefish.controller.MecanumController;
 import com.roboctopi.cuttlefishftcbridge.opmodeTypes.GamepadOpMode;
 
-public class Auto extends GamepadOpMode {
+public class Tele extends GamepadOpMode {
     CuttleRevHub ctrlHub = new CuttleRevHub(hardwareMap,CuttleRevHub.HubTypes.CONTROL_HUB);
     CuttleRevHub expHub = new CuttleRevHub(hardwareMap,CuttleRevHub.HubTypes.EXPANSION_HUB);
     CuttleEncoder leftEncoder ;
@@ -61,37 +61,14 @@ public class Auto extends GamepadOpMode {
 
         quinton = new MecanumController(rightFrontMotor,rightBackMotor,leftFrontMotor,leftBackMotor);
         ptpController = new PTPController(quinton, encoderLocalizer);
-
-        ptpController.setTranslational_PD_ctrlr(new PID( 
-            0.02,  // Proportional
-            0.0,   // Integral
-            0.002, // Derivative
-            0.0,   // Initial value (should be zero)
-            1.0    // Maximum integral power (to prevent integral windup)
-        ));
-        ptpController.setRotational_PID_ctrlr(new PID(
-            3,  // Proportional
-            0.0,   // Integral
-            0.2, // Derivative
-            0.0,   // Initial value (should be zero)
-            1.0    // Maximum integral power (to prevent integral windup)
-        ));
     }
 
-    @Override
-    public void main() {
-
-    }
-
-    @Override
-    public void runOpMode() throws InterruptedException {
-
-    }
     @Override
     public void mainLoop()
     {
         encoderLocalizer.update();
         System.out.println(encoderLocalizer.getPos());
+        //telemetry.addData("State: ", <finiteStateMachineState>)
         telemetry.addData("Localizer X:",encoderLocalizer.getPos().getX());
         telemetry.addData("Localizer Y:",encoderLocalizer.getPos().getY());
         telemetry.addData("Localizer R:",encoderLocalizer.getPos().getR());
