@@ -17,6 +17,8 @@ import com.roboctopi.cuttlefishftcbridge.devices.CuttleRevHub;
 import com.roboctopi.cuttlefishftcbridge.devices.CuttleMotor;
 import com.roboctopi.cuttlefish.controller.MecanumController;
 import com.roboctopi.cuttlefishftcbridge.opmodeTypes.GamepadOpMode;
+import org.firstinspires.ftc.teamcode.util.MotionLibrary.util.Pose2D;
+import org.firstinspires.ftc.teamcode.FiniteState;
 
 public class Tele extends GamepadOpMode {
     CuttleRevHub ctrlHub = new CuttleRevHub(hardwareMap,CuttleRevHub.HubTypes.CONTROL_HUB);
@@ -32,6 +34,8 @@ public class Tele extends GamepadOpMode {
     public CuttleMotor leftBackMotor  ;
     MecanumController quinton;
     PTPController ptpController;
+
+    FiniteState fsm;
 
     @Override
     public void onInit()
@@ -61,17 +65,28 @@ public class Tele extends GamepadOpMode {
 
         quinton = new MecanumController(rightFrontMotor,rightBackMotor,leftFrontMotor,leftBackMotor);
         ptpController = new PTPController(quinton, encoderLocalizer);
+
+        fsm = new FiniteState();
     }
 
     @Override
     public void mainLoop()
     {
+
+        if (gamepad1.a) { 
+            fsm.state = fsm.state.inatke;
+        }
+        /* Make this move along this vector
+        fsm.runStuff()
+        */
+
+
         encoderLocalizer.update();
         System.out.println(encoderLocalizer.getPos());
-        //telemetry.addData("State: ", <finiteStateMachineState>)
-        telemetry.addData("Localizer X:",encoderLocalizer.getPos().getX());
-        telemetry.addData("Localizer Y:",encoderLocalizer.getPos().getY());
-        telemetry.addData("Localizer R:",encoderLocalizer.getPos().getR());
+        telemetry.addData("State: ", fsm.state);
+        telemetry.addData("Localizer X: ",encoderLocalizer.getPos().getX());
+        telemetry.addData("Localizer Y: ",encoderLocalizer.getPos().getY());
+        telemetry.addData("Localizer R: ",encoderLocalizer.getPos().getR());
         telemetry.update();
     }
 }
