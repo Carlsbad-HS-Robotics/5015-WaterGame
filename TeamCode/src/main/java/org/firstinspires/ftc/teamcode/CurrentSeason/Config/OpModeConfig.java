@@ -69,7 +69,7 @@ public class OpModeConfig extends GamepadOpMode {
     public void mainLoop()
     {
         if (gamepad1.a) {
-            fsm.state = fsm.state.inatke;
+            //fsm.state = fsm.state.inatke;
         }
         //Make this move along this vector
         //fsm.runStuff();
