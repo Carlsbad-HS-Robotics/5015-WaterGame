@@ -16,17 +16,14 @@ public class FiniteState {
         extended,
         retracted
     }
-    robotState state = robotState.start;
+    public robotState state = robotState.start;
 
     //TODO set to array
     public Pose2D runStuff() {
         switch(state) {
-            case intake:
-                return new Pose2D();
-                break;
-            case outtake:
-                return new Pose2D();
-                break;
+            case intake: return new Pose2D(1,4, 6);
+            case outtake: return new Pose2D(3);
+            default: return null;
         }
     }
 }

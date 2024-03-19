@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 import org.firstinspires.ftc.teamcode.util.FiniteState;
-import com.roboctopi.cuttlefish.queue.ForkTask;
-import com.roboctopi.cuttlefish.queue.*;
 
 //TODO write arm code using finite state machine and APID
-public class arm {
+public class outtake {
     
     FiniteState fsm;
 
