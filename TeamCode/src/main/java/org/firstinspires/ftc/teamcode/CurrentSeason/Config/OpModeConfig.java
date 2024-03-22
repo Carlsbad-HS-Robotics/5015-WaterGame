@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.CurrentSeason.Config;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.roboctopi.cuttlefish.utils.Pose;
 import com.roboctopi.cuttlefishftcbridge.opmodeTypes.GamepadOpMode;
 import com.roboctopi.cuttlefish.localizer.ThreeEncoderLocalizer;
 import com.roboctopi.cuttlefishftcbridge.devices.CuttleEncoder;
@@ -12,6 +14,7 @@ import org.firstinspires.ftc.teamcode.util.FiniteState;
 
 import com.roboctopi.cuttlefish.utils.Direction;
 
+@TeleOp(name = "TeleOp Direct")
 public class OpModeConfig extends GamepadOpMode {
     CuttleRevHub ctrlHub = new CuttleRevHub(hardwareMap,CuttleRevHub.HubTypes.CONTROL_HUB);
     CuttleRevHub expHub = new CuttleRevHub(hardwareMap,CuttleRevHub.HubTypes.EXPANSION_HUB);
@@ -33,14 +36,14 @@ public class OpModeConfig extends GamepadOpMode {
     public void onInit()
     {
         leftFrontMotor  = ctrlHub.getMotor(3);
-        rightFrontMotor = ctrlHub.getMotor(2);
-        rightBackMotor  = expHub .getMotor(2);
-        leftBackMotor   = expHub .getMotor(3);
+        rightFrontMotor = ctrlHub.getMotor(1);
+        rightBackMotor  = ctrlHub.getMotor(0);
+        leftBackMotor   = ctrlHub.getMotor(2);
 
         leftBackMotor .setDirection(Direction.REVERSE);
         leftFrontMotor.setDirection(Direction.REVERSE);
 
-        leftEncoder  = expHub .getEncoder(3,720*4);
+        /*leftEncoder  = expHub .getEncoder(3,720*4);
         sideEncoder  = ctrlHub.getEncoder(0,720*4);
         rightEncoder = ctrlHub.getEncoder(3,720*4);
         leftEncoder.setDirection(Direction.REVERSE);
@@ -52,34 +55,37 @@ public class OpModeConfig extends GamepadOpMode {
                 29, // Radius of the wheel in mm
                 130.5, // Distance between the two forward facing wheels in mm
                 1.0 //Calibration constant (see below)
-        );
+        );*/
 
         chassis = new MecanumController(rightFrontMotor,rightBackMotor,leftFrontMotor,leftBackMotor);
-        ptpController = new PTPController(chassis, encoderLocalizer);
+        //ptpController = new PTPController(chassis, encoderLocalizer);
 
-        fsm = new FiniteState();
+        //fsm = new FiniteState();
     }
 
     @Override
     public void main() {
 
     }
-
+    public void mainLoop() {
+        chassis.setVec(new Pose(gamepad1.left_stick_x,-gamepad1.left_stick_y,-gamepad1.right_stick_x));
+    }
+/*
     @Override
     public void mainLoop()
     {
-        if (gamepad1.a) {
-            fsm.state = fsm.state.intake;
-        }
+        //if (gamepad1.a) {
+        //    fsm.state = fsm.state.intake;
+        //}
         //Make this move along this vector
         //fsm.runStuff();
 
 
 
-        encoderLocalizer.update();
+        //encoderLocalizer.update();
         //telemetry.addData("State: ", fsm.state);
-        telemetry.addData("Localizer X: ",encoderLocalizer.getPos().getX());
-        telemetry.addData("Localizer Y: ",encoderLocalizer.getPos().getY());
-        telemetry.update();
-    }
+        //telemetry.addData("Localizer X: ",encoderLocalizer.getPos().getX());
+        //telemetry.addData("Localizer Y: ",encoderLocalizer.getPos().getY());
+        //telemetry.update();
+    }*/
 }

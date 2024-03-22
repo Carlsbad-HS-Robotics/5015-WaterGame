@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.roboctopi.cuttlefish.controller.MecanumController;
 import com.roboctopi.cuttlefish.utils.Pose;
 
-@TeleOp(name="Teleop")
+@TeleOp(name="Driver Op")
 public abstract class DriverOpMode extends OpModeConfig {
     MecanumController chassis;
     public void mainLoop(){
